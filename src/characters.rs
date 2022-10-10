@@ -1,7 +1,7 @@
 pub mod player {
     use rand::Rng;
 
-    use crate::card::card::Card;
+    use crate::{card::card::Card, common::common::read_input};
 
     #[derive(Debug)]
     pub struct Player {
@@ -64,6 +64,18 @@ pub mod player {
 
             self.hand.remove(card_index);
             // println!("Your enemy's life now is {}", enemy.current_hp);
+        }
+
+        pub fn act(&mut self, action: String) {
+            match action.as_str() {
+                "draw" => self.draw_cards(2),
+                "show" => self.show_hand(),
+                "play" => {
+                    let card_index = read_input().parse::<usize>().unwrap();
+                    self.play_card(card_index)
+                }
+                _ => println!("No match.\n"),
+            }
         }
     }
 }
