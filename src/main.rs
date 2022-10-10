@@ -3,11 +3,13 @@
 mod card;
 mod characters;
 mod common;
+mod enemy;
 mod hud;
+mod player;
 
-use characters::player::Player;
 use common::common::read_input;
 use hud::hud::show_hud;
+use player::player::Player;
 
 fn main() {
     let mut hero = Player::new("Hero", "🤠️");

@@ -19,16 +19,14 @@ pub mod card {
 
     impl Card {
         pub fn show_hand(hand: &Vec<Card>) {
-            let quantity = hand.len();
-
             let mut edges = String::from("");
             let mut damages = String::from("");
             let mut costs = String::from("");
 
-            for i in 0..quantity {
+            for card in hand {
                 edges.push_str("*----*  ");
-                damages.push_str(format!("|🗡️  {}|  ", hand[i].damage).as_str());
-                costs.push_str(format!("|🌞️ {}|  ", hand[i].cost).as_str());
+                damages.push_str(format!("|🗡️  {}|  ", card.damage).as_str());
+                costs.push_str(format!("|🌞️ {}|  ", card.cost).as_str());
             }
 
             println!("{}", edges);
