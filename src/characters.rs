@@ -5,13 +5,13 @@ pub mod player {
 
     #[derive(Debug)]
     pub struct Player {
-        name: String,
-        avatar: String,
-        initial_hp: i32,
-        current_hp: i32,
-        strength: i32,
-        defense: i32,
-        energy: i32,
+        pub name: String,
+        pub avatar: String,
+        pub initial_hp: i32,
+        pub current_hp: i32,
+        pub strength: i32,
+        pub defense: i32,
+        pub energy: i32,
         hand: Vec<Card>,
     }
 
@@ -36,24 +36,21 @@ pub mod player {
         pub fn draw_cards(&mut self, quantity: usize) {
             let mut rng = rand::thread_rng();
 
-            println!("drawing cards");
-
             for i in 0..quantity {
                 let card = Card {
                     cost: rng.gen_range(0..4),
                     damage: rng.gen_range(1..4),
                 };
 
+                println!("Card drawn:\n{:}", card);
+
                 self.hand.push(card);
             }
         }
 
         pub fn show_hand(&self) {
-            println!("showing hand");
-
-            for card in self.hand.iter() {
-                println!("{:?}", card);
-            }
+            println!("Hand:");
+            Card::show_hand(&self.hand);
         }
 
         pub fn play_card(&mut self, card_index: usize) {
@@ -68,7 +65,7 @@ pub mod player {
 
         pub fn act(&mut self, action: String) {
             match action.as_str() {
-                "draw" => self.draw_cards(2),
+                "draw" => self.draw_cards(1),
                 "show" => self.show_hand(),
                 "play" => {
                     let card_index = read_input().parse::<usize>().unwrap();
