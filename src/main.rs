@@ -3,12 +3,16 @@
 mod card;
 mod characters;
 mod common;
+mod hud;
 
 use characters::player::Player;
 use common::common::read_input;
+use hud::hud::show_hud;
 
 fn main() {
     let mut hero = Player::new("Hero", "🤠️");
+
+    show_hud(&hero);
 
     loop {
         read_user_action(&mut hero);
