@@ -8,8 +8,8 @@ pub mod enemy {
         initial_hp: i32,
         current_hp: i32,
         strength: i32,
-        defense: i32,
-        intention: String,
+        block: i32,
+        // intention: Intention,
     }
 
     impl Enemy {
@@ -24,9 +24,30 @@ pub mod enemy {
                 initial_hp,
                 current_hp: initial_hp,
                 strength: 0,
-                defense: 0,
-                intention: String::from(""),
+                block: 2,
+                // intention: Enemy::random_action(),
             }
         }
+
+        pub fn take_damage(&mut self, damage: i32) {
+            if self.block == 0 {
+                self.current_hp -= damage;
+            } else {
+                self.block -= damage;
+                if self.block < 0 {
+                    self.current_hp += self.block;
+                    self.block = 0;
+                }
+            }
+
+            println!("enemy's shield: {}", self.block);
+            println!("enemy's hp: {}", self.current_hp);
+        }
+
+        // fn random_action() -> &Intention {
+        //     let intentions = vec![Intention::Attack, Intention::Block];
+        //     // intentions.choose(&mut rand::thread_rng()).unwrap()
+        //     intentions.get(0).unwrap()
+        // }
     }
 }

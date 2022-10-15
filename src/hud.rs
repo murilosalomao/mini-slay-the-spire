@@ -12,7 +12,7 @@ pub mod hud {
         );
         println!(
             "🗡️ {}  🛡️ {}  🌞️ {}\n",
-            character.strength, character.defense, character.energy
+            character.strength, character.block, character.energy
         );
     }
 
