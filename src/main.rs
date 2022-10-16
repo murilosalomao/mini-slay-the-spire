@@ -1,7 +1,7 @@
 #![allow(dead_code, unused_variables)]
 
 mod card;
-mod characters;
+mod character;
 mod common;
 mod enemy;
 mod hud;

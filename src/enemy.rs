@@ -1,6 +1,8 @@
 pub mod enemy {
     use rand::Rng;
 
+    use crate::character::character::Character;
+
     #[derive(Debug)]
     pub struct Enemy {
         name: String,
@@ -10,6 +12,13 @@ pub mod enemy {
         strength: i32,
         block: i32,
         // intention: Intention,
+    }
+
+    impl Character for Enemy {
+        fn apply_block(&mut self, block: i32) {
+            self.block += block;
+            println!("enemy's new block: {}", self.block);
+        }
     }
 
     impl Enemy {

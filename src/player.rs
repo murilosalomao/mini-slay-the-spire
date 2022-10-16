@@ -1,5 +1,5 @@
 pub mod player {
-    use crate::{card::card::CardType, enemy::enemy::Enemy};
+    use crate::{card::card::CardType, character::character::Character, enemy::enemy::Enemy};
     use rand::Rng;
 
     use crate::card::card::Card;
@@ -14,6 +14,13 @@ pub mod player {
         pub block: i32,
         pub energy: i32,
         hand: Vec<Card>,
+    }
+
+    impl Character for Player {
+        fn apply_block(&mut self, block: i32) {
+            self.block += block;
+            println!("hero's new block: {}", self.block);
+        }
     }
 
     impl Player {
@@ -67,11 +74,6 @@ pub mod player {
                 }
                 None => println!("Invalid index"),
             }
-        }
-
-        fn apply_block(&mut self, block: i32) {
-            self.block += block;
-            println!("hero's new block: {}", self.block);
         }
     }
 }

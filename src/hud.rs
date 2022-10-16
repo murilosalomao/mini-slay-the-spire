@@ -1,6 +1,6 @@
 pub mod hud {
 
-    use crate::Player;
+    use crate::{character::character::Character, Player};
 
     pub fn show_hud(character: &Player) {
         println!("{} {}", character.avatar, character.name);
