@@ -3,6 +3,7 @@ pub mod hud {
     use crate::Player;
 
     pub fn show_hud(character: &Player) {
+        // print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
         println!("{} {}", character.avatar, character.name);
         println!(
             "🩸️ [{}] {}/{}",

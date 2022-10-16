@@ -18,7 +18,6 @@ fn main() {
     let mut monster = Enemy::new("Monster", "👹️");
 
     loop {
-        show_hud(&hero);
         new_round(&mut hero, &mut monster);
     }
 }
@@ -27,6 +26,7 @@ fn new_round(hero: &mut Player, monster: &mut Enemy) {
     hero.draw_cards(5);
 
     loop {
+        show_hud(&hero);
         hero.show_hand();
 
         let action = read_input();

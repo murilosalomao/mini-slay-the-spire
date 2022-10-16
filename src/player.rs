@@ -68,6 +68,11 @@ pub mod player {
         pub fn play_card(&mut self, card_index: usize, enemy: &mut Enemy) {
             match self.hand.get(card_index) {
                 Some(card) => {
+                    if card.cost > self.energy {
+                        println!("Not enough energy to play this card");
+                        return;
+                    }
+
                     self.energy -= card.cost;
 
                     match card.card_type {
@@ -96,7 +101,6 @@ pub mod player {
 
         pub fn apply_energy_buff(&mut self, buff: i32) {
             self.energy += buff;
-            println!("hero's new energy: {}", self.energy);
         }
     }
 }
