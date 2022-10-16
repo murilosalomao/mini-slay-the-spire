@@ -91,6 +91,18 @@ pub mod player {
                         CardType::NrgBuff(buff) => {
                             self.apply_energy_buff(buff);
                         }
+                        CardType::DexDebuff(debuff) => {
+                            self.apply_dexterity_debuff(enemy, debuff);
+                        }
+                        CardType::StrDebuff(debuff) => {
+                            self.apply_strength_debuff(enemy, debuff);
+                        }
+                        CardType::Vulnerability(vul) => {
+                            self.apply_vulnerability(enemy, vul);
+                        }
+                        CardType::Weakness(weak) => {
+                            self.apply_weakness(enemy, weak);
+                        }
                     }
 
                     self.hand.remove(card_index);
@@ -101,6 +113,22 @@ pub mod player {
 
         pub fn apply_energy_buff(&mut self, buff: i32) {
             self.energy += buff;
+        }
+
+        fn apply_dexterity_debuff(&mut self, enemy: &mut Enemy, debuff: i32) {
+            enemy.take_dexterify_debuff(debuff);
+        }
+
+        fn apply_strength_debuff(&mut self, enemy: &mut Enemy, debuff: i32) {
+            enemy.take_strength_debuff(debuff);
+        }
+
+        fn apply_vulnerability(&mut self, enemy: &mut Enemy, vul: i32) {
+            enemy.take_vulnerability(vul);
+        }
+
+        fn apply_weakness(&mut self, enemy: &mut Enemy, weak: i32) {
+            enemy.take_weakness(weak);
         }
     }
 }

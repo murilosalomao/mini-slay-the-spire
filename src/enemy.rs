@@ -12,6 +12,8 @@ pub mod enemy {
         strength: i32,
         dexterity: i32,
         block: i32,
+        vulnerability: i32,
+        weakness: i32,
         // intention: Intention,
     }
 
@@ -46,6 +48,8 @@ pub mod enemy {
                 strength: 0,
                 dexterity: 0,
                 block: 2,
+                vulnerability: 0,
+                weakness: 0,
                 // intention: Enemy::random_action(),
             }
         }
@@ -63,6 +67,22 @@ pub mod enemy {
 
             println!("enemy's shield: {}", self.block);
             println!("enemy's hp: {}", self.current_hp);
+        }
+
+        pub fn take_dexterify_debuff(&mut self, debuff: i32) {
+            self.dexterity -= debuff;
+        }
+
+        pub fn take_strength_debuff(&mut self, debuff: i32) {
+            self.dexterity -= debuff;
+        }
+
+        pub fn take_vulnerability(&mut self, vul: i32) {
+            self.vulnerability += vul;
+        }
+
+        pub fn take_weakness(&mut self, weak: i32) {
+            self.weakness += weak;
         }
 
         // fn random_action() -> &Intention {

@@ -16,6 +16,10 @@ pub mod card {
         DexBuff(i32),
         StrBuff(i32),
         NrgBuff(i32),
+        DexDebuff(i32),
+        StrDebuff(i32),
+        Vulnerability(i32),
+        Weakness(i32),
     }
 
     // impl fmt::Display for Card {
@@ -45,6 +49,18 @@ pub mod card {
                     CardType::DexBuff(buff) => values.push_str(format!("|🦵️ {}|  ", buff).as_str()),
                     CardType::StrBuff(buff) => values.push_str(format!("|💪️ {}|  ", buff).as_str()),
                     CardType::NrgBuff(buff) => values.push_str(format!("|💫️ {}|  ", buff).as_str()),
+                    CardType::DexDebuff(debuff) => {
+                        values.push_str(format!("|🩹️ {}|  ", debuff).as_str())
+                    }
+                    CardType::StrDebuff(debuff) => {
+                        values.push_str(format!("|🦴️ {}|  ", debuff).as_str())
+                    }
+                    CardType::Vulnerability(vul) => {
+                        values.push_str(format!("|💔️ {}|  ", vul).as_str())
+                    }
+                    CardType::Weakness(weak) => {
+                        values.push_str(format!("|🤮️ {}|  ", weak).as_str())
+                    }
                 }
 
                 costs.push_str(format!("|🌞️ {}|  ", card.cost).as_str());
@@ -56,20 +72,24 @@ pub mod card {
             println!("{}", edges);
         }
 
-        pub fn new_random() -> Card {
+        pub fn new_random() -> Self {
             let mut rng = rand::thread_rng();
 
-            let value = rng.gen_range(0..4);
+            let value = rng.gen_range(1..4);
 
-            let card_type = match rng.gen_range(0..5) {
+            let card_type = match rng.gen_range(0..9) {
                 0 => CardType::Attack(value),
                 1 => CardType::Block(value),
                 2 => CardType::DexBuff(value),
                 3 => CardType::StrBuff(value),
-                _ => CardType::NrgBuff(value),
+                4 => CardType::NrgBuff(value),
+                5 => CardType::DexDebuff(value),
+                6 => CardType::StrDebuff(value),
+                7 => CardType::Vulnerability(value),
+                _ => CardType::Weakness(value),
             };
 
-            Card {
+            Self {
                 cost: rng.gen_range(0..4),
                 card_type,
             }
