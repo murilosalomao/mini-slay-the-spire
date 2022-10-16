@@ -13,6 +13,9 @@ pub mod card {
     pub enum CardType {
         Attack(i32),
         Block(i32),
+        DexBuff(i32),
+        StrBuff(i32),
+        NrgBuff(i32),
     }
 
     // impl fmt::Display for Card {
@@ -39,6 +42,9 @@ pub mod card {
                         values.push_str(format!("|🗡️  {}|  ", damage).as_str());
                     }
                     CardType::Block(block) => values.push_str(format!("|🛡️  {}|  ", block).as_str()),
+                    CardType::DexBuff(buff) => values.push_str(format!("|🦵️ {}|  ", buff).as_str()),
+                    CardType::StrBuff(buff) => values.push_str(format!("|💪️ {}|  ", buff).as_str()),
+                    CardType::NrgBuff(buff) => values.push_str(format!("|💫️ {}|  ", buff).as_str()),
                 }
 
                 costs.push_str(format!("|🌞️ {}|  ", card.cost).as_str());
@@ -55,9 +61,12 @@ pub mod card {
 
             let value = rng.gen_range(0..4);
 
-            let card_type = match rng.gen_range(0..2) {
+            let card_type = match rng.gen_range(0..5) {
                 0 => CardType::Attack(value),
-                _ => CardType::Block(value),
+                1 => CardType::Block(value),
+                2 => CardType::DexBuff(value),
+                3 => CardType::StrBuff(value),
+                _ => CardType::NrgBuff(value),
             };
 
             Card {

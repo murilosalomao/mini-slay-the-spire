@@ -11,6 +11,7 @@ pub mod player {
         pub initial_hp: i32,
         pub current_hp: i32,
         pub strength: i32,
+        pub dexterity: i32,
         pub block: i32,
         pub energy: i32,
         hand: Vec<Card>,
@@ -19,23 +20,31 @@ pub mod player {
     impl Character for Player {
         fn apply_block(&mut self, block: i32) {
             self.block += block;
-            println!("hero's new block: {}", self.block);
+        }
+
+        fn apply_dexterity_buff(&mut self, buff: i32) {
+            self.dexterity += buff;
+        }
+
+        fn apply_strength_buff(&mut self, buff: i32) {
+            self.strength += buff;
         }
     }
 
     impl Player {
-        pub fn new(name: &str, avatar: &str) -> Player {
+        pub fn new(name: &str, avatar: &str) -> Self {
             let mut rng = rand::thread_rng();
 
             let initial_hp = rng.gen_range(10..21);
 
-            Player {
+            Self {
                 name: String::from(name),
                 avatar: String::from(avatar),
                 initial_hp,
                 current_hp: initial_hp,
                 strength: 0,
                 block: 0,
+                dexterity: 0,
                 energy: 3,
                 hand: vec![],
             }
@@ -63,10 +72,19 @@ pub mod player {
 
                     match card.card_type {
                         CardType::Attack(damage) => {
-                            enemy.take_damage(damage);
+                            enemy.take_damage(self.strength + damage);
                         }
                         CardType::Block(block) => {
-                            self.apply_block(block);
+                            self.apply_block(self.dexterity + block);
+                        }
+                        CardType::DexBuff(buff) => {
+                            self.apply_dexterity_buff(buff);
+                        }
+                        CardType::StrBuff(buff) => {
+                            self.apply_strength_buff(buff);
+                        }
+                        CardType::NrgBuff(buff) => {
+                            self.apply_energy_buff(buff);
                         }
                     }
 
@@ -74,6 +92,11 @@ pub mod player {
                 }
                 None => println!("Invalid index"),
             }
+        }
+
+        pub fn apply_energy_buff(&mut self, buff: i32) {
+            self.energy += buff;
+            println!("hero's new energy: {}", self.energy);
         }
     }
 }

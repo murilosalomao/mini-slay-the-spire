@@ -10,6 +10,7 @@ pub mod enemy {
         initial_hp: i32,
         current_hp: i32,
         strength: i32,
+        dexterity: i32,
         block: i32,
         // intention: Intention,
     }
@@ -18,6 +19,16 @@ pub mod enemy {
         fn apply_block(&mut self, block: i32) {
             self.block += block;
             println!("enemy's new block: {}", self.block);
+        }
+
+        fn apply_dexterity_buff(&mut self, buff: i32) {
+            self.dexterity += buff;
+            println!("enemy's new dexterity: {}", self.dexterity);
+        }
+
+        fn apply_strength_buff(&mut self, buff: i32) {
+            self.strength += buff;
+            println!("enemy's new strength: {}", self.strength);
         }
     }
 
@@ -33,6 +44,7 @@ pub mod enemy {
                 initial_hp,
                 current_hp: initial_hp,
                 strength: 0,
+                dexterity: 0,
                 block: 2,
                 // intention: Enemy::random_action(),
             }

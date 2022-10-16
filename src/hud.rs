@@ -11,8 +11,8 @@ pub mod hud {
             character.initial_hp
         );
         println!(
-            "🗡️ {}  🛡️ {}  🌞️ {}\n",
-            character.strength, character.block, character.energy
+            "💪️ {}  🛡️ {}  🦵️ {}  🌞️ {}\n",
+            character.strength, character.block, character.dexterity, character.energy
         );
     }
 
